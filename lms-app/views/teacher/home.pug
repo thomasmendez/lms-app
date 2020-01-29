@@ -1,0 +1,32 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if teacher 
+    +head("Teacher Homepage")
+  else 
+    +head("Teacher does not exist")
+
+  link(rel="stylesheet" href="/stylesheets/portal/home.css")
+
+  body
+    div.content 
+        if teacher
+            .row
+                h3 #{teacher.firstName} #{teacher.lastName}
+            .row
+                h4 School Name
+            .row
+                h5 Classes (#{teacher.semester} #{teacher.year})
+
+            if teacher.courses
+
+                for course in teacher.courses
+
+                    .row
+                        p.class#item 
+                            a(href= currentURL + "course/" +  course.course + "/")
+                                | #{course.course}: #{course.fullCourseName}
+
+  include ../common/footer.pug
+    +footer()

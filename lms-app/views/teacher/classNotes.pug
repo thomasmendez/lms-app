@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if classNotes 
+    +head("Class Notes Homepage")
+  else 
+    +head("Class Notes Not Found")
+
+  link(rel="stylesheet" href="/stylesheets/portal/classNotes.css")
+  script(src="/javascripts/modifyHTML.js")
+
+  body
+    div.content
+      if classNotes 
+        .row
+          h4 Class Notes for #{classNotes.fullCourseName}
+        .row
+          table(style='width:100%', border='1')
+            tr
+              th Class Note Name
+              th Class Date
+            for classNote in classNotes.classNotes
+              tr
+                td 
+                  a(href= currentURL + "/id/" + classNote.noteFileID + "/files/" + classNote.noteFile) #{classNote.noteName} 
+                td #{classNote.noteDate}
+        
+  include ../common/footer.pug
+  +footer()

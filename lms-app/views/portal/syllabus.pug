@@ -1,0 +1,66 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if syllabus 
+    +head("Syllabus Homepage")
+  else 
+    +head("Syllabus Not Found")
+
+  link(rel="stylesheet" href="/stylesheets/portal/syllabus.css")
+  script(src="/javascripts/modifyHTML.js")
+
+  header
+    include ../common/navbar.pug
+    +navbar(user)
+
+  body
+    div.content
+      if user
+        if syllabus.syllabus.fileID
+          .row
+            h4 Update Syllabus
+          .row
+            .col-sm-2
+              a(href= currentURL + "/id/" + syllabus.syllabus.fileID + "/files/" + syllabus.syllabus.syllabusFile) Current Syllabus
+            .col-sm-4
+              p Date Uploaded: #{syllabus.syllabus.uploadDate}
+          .row#updateSyllabusButton
+              button.btn-primary.btn-sm(onclick='updateSyllabus("'+ syllabus.course + '", ' + '"' + syllabus.fullCourseName + '", ' + "'" + syllabus.syllabus.fileID + "'" + ')') update
+
+          //.row
+            form(action="/user/updateSyllabus", method="POST", id="updateSyllabusForm" enctype="multipart/form-data")
+              div.row
+                .col-sm-6
+                  label.small.mb-1.mt-3 Upload File: 
+                    input(required=true, name='uploadfile', type='file')
+                .col-sm-6.text-center
+                  button.btn-primary.btn-sm(type='submit') update syllabus
+                input(type='hidden', name='course', value=syllabus.course)
+                input(type='hidden', name='courseFullName', value=syllabus.fullCourseName)
+                input(type='hidden', name='fileID', value=syllabus.syllabus.fileID)
+
+        else 
+          .row
+            h4 Upload Syllabus
+
+          .row#addSyllabusButton
+              button.btn-primary.btn-sm(onclick='addSyllabus("'+ syllabus.course + '", ' + '"' + syllabus.fullCourseName + '"' + ')') +
+            
+          //.row
+            form(action="/user/addSyllabus", method="POST", id="addSyllabusForm" enctype="multipart/form-data")
+              div.row
+                .col-sm-6
+                  label.small.mb-1.mt-3 Upload File: 
+                    input(required=true, name='uploadfile', type='file')
+                .col-sm-6.text-center
+                  button.btn-primary.btn-sm(type='submit') add syllabus
+                input(type='hidden', name='course', value=syllabus.course)
+                input(type='hidden', name='courseFullName', value=syllabus.fullCourseName)
+
+      else 
+        .row
+          p please login
+      
+  include ../common/footer.pug
+  +footer()

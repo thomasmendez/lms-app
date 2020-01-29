@@ -1,0 +1,22 @@
+doctype html
+html(lang='en')
+  include ../../common/head.pug
+  +head("Login")
+  link(rel="stylesheet" href="/stylesheets/portal/settings.css")
+  script(src="/javascripts/settings/settings.js")
+  header
+    include ../../common/navbar.pug
+    +navbar()
+  body
+    .container
+      .row
+        .col-sm-12.offset-md-2.col-md-8
+          .jumbotron
+            // add the confirm notification
+            .row
+              .col-xs-12.col-xs-12.col-sm-12
+                if (success && success.message)
+                  .alert.alert-success(role='alert', style={'width': '100%'})
+                    | #{success.message}
+    include ../../common/footer.pug
+    +footer()

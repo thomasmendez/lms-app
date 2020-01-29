@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if otherNotes 
+    +head("Other Files Homepage")
+  else 
+    +head("Other Files Not Found")
+
+  link(rel="stylesheet" href="/stylesheets/portal/otherNotes.css")
+  script(src="/javascripts/modifyHTML.js")
+
+  body
+    div.content
+      if otherNotes 
+        .row
+          h4 Other Files for #{otherNotes.fullCourseName}
+        .row
+          table(style='width:100%', border='1')
+            tr
+              th Other File Name
+              th Due Date
+            for otherNote in otherNotes.otherNotes
+              tr
+                td 
+                  a(href= currentURL + "/id/" + otherNote.noteFileID + "/files/" + otherNote.noteFile) #{otherNote.noteName} 
+                td #{otherNote.noteDate}
+        
+  include ../common/footer.pug
+  +footer()

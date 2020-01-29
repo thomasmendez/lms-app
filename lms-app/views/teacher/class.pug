@@ -1,0 +1,44 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if course 
+    +head("Course Homepage")
+  else 
+    +head("Course Not Found")
+
+  body
+
+    div.content 
+
+        if course 
+
+            .row
+                h3 #{course.course}: #{course.fullCourseName}
+            .row
+                p 
+                    a(href= currentURL + 'syllabus') Syllabus
+            .row
+                p 
+                    a(href= currentURL + 'schedule') Schedule
+            .row
+                p 
+                    a(href= currentURL + 'assignments') Assignments
+            .row
+                p 
+                    a(href= currentURL + 'lectureNotes') Lecture Notes
+            .row
+                p 
+                    a(href= currentURL + 'classNotes') Class Notes
+            .row
+                p 
+                    a(href= currentURL + 'otherNotes') Other Files
+
+        else 
+
+            if searchedCourse
+                .row
+                    p #{searchedCourse} does not exist
+
+    include ../common/footer.pug
+        +footer()

@@ -1,0 +1,66 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if schedule 
+    +head("Schedule Homepage")
+  else 
+    +head("Schedule Not Found")
+
+  link(rel="stylesheet" href="/stylesheets/portal/schedule.css")
+  script(src="/javascripts/modifyHTML.js")
+
+  header
+    include ../common/navbar.pug
+    +navbar(user)
+
+  body
+    div.content
+      if user
+        if schedule.schedule.fileID
+          .row
+            h4 Update Schedule
+          .row
+            .col-sm-2
+              a(href= currentURL + "/id/" + schedule.schedule.fileID + "/files/" + schedule.schedule.scheduleFile) Current Schedule
+            .col-sm-4
+              p Date Uploaded: #{schedule.schedule.uploadDate}
+          .row#updateScheduleButton
+              button.btn-primary.btn-sm(onclick='updateSchedule("'+ schedule.course + '", ' + '"' + schedule.fullCourseName + '", ' + "'" + schedule.schedule.fileID + "'" + ')') update
+
+          //.row
+            form(action="/user/updateSchedule", method="POST", id="updateScheduleForm" enctype="multipart/form-data")
+              div.row
+                .col-sm-6
+                  label.small.mb-1.mt-3 Upload File: 
+                    input(required=true, name='uploadfile', type='file')
+                .col-sm-6.text-center
+                  button.btn-primary.btn-sm(type='submit') update schedule
+                input(type='hidden', name='course', value=schedule.course)
+                input(type='hidden', name='courseFullName', value=schedule.fullCourseName)
+                input(type='hidden', name='fileID', value=schedule.schedule.fileID)
+
+        else 
+          .row
+            h4 Upload Schedule
+
+          .row#addScheduleButton
+              button.btn-primary.btn-sm(onclick='addSchedule("'+ schedule.course + '", ' + '"' + schedule.fullCourseName + '"' + ')') +
+            
+          //.row
+            form(action="/user/addSchedule", method="POST", id="addScheduleForm" enctype="multipart/form-data")
+              div.row
+                .col-sm-6
+                  label.small.mb-1.mt-3 Upload File: 
+                    input(required=true, name='uploadfile', type='file')
+                .col-sm-6.text-center
+                  button.btn-primary.btn-sm(type='submit') add schedule
+                input(type='hidden', name='course', value=schedule.course)
+                input(type='hidden', name='courseFullName', value=schedule.fullCourseName)
+
+      else 
+        .row
+          p please login
+      
+  include ../common/footer.pug
+  +footer()

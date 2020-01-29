@@ -1,0 +1,95 @@
+.text-center {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.h4 {
+    text-align: center;
+    float: left;
+}
+
+table {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+th.button {
+  width: 10%;
+  overflow: hidden;
+  height: 100%;
+  padding: 0px;
+}
+th.title {
+  width: 40%; 
+  height: 100%;
+}
+
+#format {
+    padding-left: 10px;
+}
+
+#form {
+    border: solid black 1px;
+}
+
+#settingsBar {
+    width: 100%;
+}
+
+#otherSettingsBar {
+    width: 50%;
+}
+
+#backButton {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+    padding: 0px;
+}
+
+#header {
+    display: inline-block;
+}
+
+/* arrows */
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    padding: 3px;
+}
+
+i:hover {
+    border-color: rgb(105,105,105);
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    float: right;
+    position: relative;
+    top: 7px;
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  float: left;
+  position: relative;
+  top: 4px;
+  left: 40%;
+  padding: 6px;
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

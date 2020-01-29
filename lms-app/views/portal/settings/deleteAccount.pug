@@ -1,0 +1,73 @@
+doctype html
+html(lang='en')
+  include ../../common/head.pug
+
+  if user 
+    +head("Teacher Homepage")
+  else 
+    +head("Please login")
+
+  link(rel="stylesheet" href="/stylesheets/portal/settings.css")
+  script(src="/javascripts/settings/settings.js")
+  script(src="/javascripts/settings/deleteAccount.js")
+  header
+    include ../../common/navbar.pug
+    +navbar(user)
+
+  body
+    div.content 
+      if user
+          .row
+            .col-sm-3
+              h3.class Settings
+            .col-sm-9
+              table
+                th.button
+                  button#backButton(onclick='backButton("' + settingsURL + '")')
+                    i.arrow.left
+                th.title 
+                  h3.class Delete Account 
+          .row#settings
+            .col-sm-3
+              .row
+                ul.class.list-group#settingsBar
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/account").active Manage Account  
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/archiveManage") Archive Course(s)
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/archiveView") View Archived Courses
+            .col-sm-9
+              .row
+                form(action= settingsURL + '/update/deleteAccount', method='POST', id='deleteAccount')
+                  .row
+                    .col-xs-12.col-xs-12.col-sm-12
+                      .alert.alert-danger(role='alert', style={'width': '100%'})
+                        | Deleting your account will remove all of your information. 
+                        br
+                        | All current courses, archived courses, and uploaded files will be removed.
+                        br
+                        | Please enter your current password to confirm deletion of your account.
+                  .row
+                    .col-xs-12.col-xs-12.col-sm-6
+                      label.small.mb-1.mt-3 Current Password:
+                      if (formData && formData.currentPassword)
+                        if (errors && errors.currentPassword)
+                          input(placeholder='Current password ', required=true, name='currentPassword', type='password', onInput='fieldInput()', id='inputCurrentPassword', value=formData.currentPassword , style={'border-color': 'red'}).form-control
+                          p(id='currentPassword Error').small.text-danger #{errors.currentPassword}
+                        else 
+                          input(placeholder='Current password ', required=true, name='currentPassword', type='password', onInput='fieldInput()', id='inputCurrentPassword', value=formData.currentPassword ).form-control
+                          p(id='currentPassword Error').small.text-danger 
+                      else 
+                        if (errors && errors.currentPassword)
+                          input(placeholder='Current password ', required=true, name='currentPassword', type='password', onInput='fieldInput()', id='inputCurrentPassword', style={'border-color': 'red'}).form-control
+                          p(id='currentPassword Error').small.text-danger #{errors.currentPassword}
+                        else 
+                          input(placeholder='Current password ', required=true, name='currentPassword', type='password', onInput='fieldInput()', id='inputCurrentPassword').form-control
+                          p(id='currentPassword Error').small.text-danger
+                  .row
+                    .col-xs-12.col-xs-12.col-sm-12
+                      button.mt-3.btn.btn-danger(type='submit', style={'width':'100%'}) Delete Account
+      else 
+          .row
+              p please login
+
+    include ../../common/footer.pug
+    +footer()

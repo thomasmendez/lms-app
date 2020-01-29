@@ -1,0 +1,68 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if assignments 
+    +head("Assignments Homepage")
+  else 
+    +head("Assignments Not Found")
+
+  link(rel="stylesheet" href="/stylesheets/portal/assignments.css")
+  script(src="/javascripts/modifyHTML.js")
+  script(src="/javascripts/submitCustomForm.js")
+
+  header
+    include ../common/navbar.pug
+    +navbar(user)
+
+  body
+    div.content
+      if user
+        if assignments 
+            .row
+              h4 Assignments for #{assignments.fullCourseName}
+            .row
+              form(action="/user/removeAssignment", method="POST", id="deleteAssignmentForm")
+                table(style='width:100%', border='1')
+                  tr
+                    th Assignment Name
+                    th Due Date
+                  for assignment in assignments.assignments
+                    tr
+                      td 
+                        a(href= currentURL + "/id/" + assignment.fileID + "/files/" + assignment.assignmentFile) #{assignment.assignmentName} 
+                      td #{assignment.dueDate}
+                      td 
+                        button.btn.btn-danger(type="button" onclick='deleteAssignment("'+ assignment._id + '", ' + '"' + assignment.fileID + '", ' + '"' + assignment.assignmentFile + '"' + ')') -
+                input(type='hidden', name='course', value=assignments.course)
+                input(type='hidden', name='courseFullName', value=assignments.fullCourseName)
+                input(type='hidden', id="assignmentIDPlaceholder")
+                input(type='hidden', id="assignmentFileIDPlaceholder")
+                input(type='hidden', id="assignmentFilenamePlaceholder")
+
+            .row#addAssignmentButton
+              button.btn-primary.btn-sm(onclick='addAssignment("'+ assignments.course + '", ' + '"' + assignments.fullCourseName + '"' + ')') +
+            
+            //.row
+              form(action='/user/addAssignment' method='POST' enctype="multipart/form-data")
+                  div.row
+                      .col-sm-3
+                          label.small.mb-1.mt-3 Assignment Name:
+                              input(placeholder='Name', required=true, name='name', type='text', value='').form-control    
+                      .col-sm-3
+                          label.small.mb-1.mt-3 Due Date:
+                              input(placeholder='Due Date', required=true, name='date', type='text', value='').form-control 
+                      .col-sm-3
+                          label.small.mb-1.mt-3 Upload File:
+                              input(required=true, name='uploadfile', type='file')
+                      input(type='hidden', name='course', value=assignments.course)
+                      input(type='hidden', name='courseFullName', value=assignments.fullCourseName)
+                      .col-sm-3.text-center
+                          button.btn-primary.btn-sm(type='submit') add assignment
+                         
+      else 
+          .row
+              p please login
+      
+  include ../common/footer.pug
+  +footer()

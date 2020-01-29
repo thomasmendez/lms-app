@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if lectureNotes 
+    +head("Lecture Notes Homepage")
+  else 
+    +head("Lecture Notes Not Found")
+
+  link(rel="stylesheet" href="/stylesheets/portal/lectureNotes.css")
+  script(src="/javascripts/modifyHTML.js")
+
+  body
+    div.content
+      if lectureNotes 
+        .row
+          h4 Lecture Notes for #{lectureNotes.fullCourseName}
+        .row
+          table(style='width:100%', border='1')
+            tr
+              th Lecture Note Name
+              th Lecture Date
+            for lectureNote in lectureNotes.lectureNotes
+              tr
+                td 
+                  a(href= currentURL + "/id/" + lectureNote.noteFileID + "/files/" + lectureNote.noteFile) #{lectureNote.noteName} 
+                td #{lectureNote.noteDate}
+        
+  include ../common/footer.pug
+  +footer()

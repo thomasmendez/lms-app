@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if assignments 
+    +head("Assignments Homepage")
+  else 
+    +head("Assignments Not Found")
+
+  link(rel="stylesheet" href="/stylesheets/portal/assignments.css")
+  script(src="/javascripts/modifyHTML.js")
+
+  body
+    div.content
+      if assignments 
+        .row
+          h4 Assignments for #{assignments.fullCourseName}
+        .row
+          table(style='width:100%', border='1')
+            tr
+              th Assignment Name
+              th Due Date
+            for assignment in assignments.assignments
+              tr
+                td 
+                  a(href= currentURL + "/id/" + assignment.assignmentFileID + "/files/" + assignment.assignmentFile) #{assignment.assignmentName} 
+                td #{assignment.dueDate}
+        
+  include ../common/footer.pug
+  +footer()

@@ -1,0 +1,39 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+
+  if user 
+    +head("Teacher Homepage")
+  else 
+    +head("Please login")
+
+  link(rel="stylesheet" href="/stylesheets/portal/home.css")
+  script(src="/javascripts/modifyHTML.js")
+  header
+    include ../common/navbar.pug
+    +navbar(user)
+
+  body
+    div.content 
+      if user
+          .row
+            h3.class#item #{user.firstName} #{user.lastName}
+          .row
+            h4.class#item School Name
+          .row
+            h5.class#item Classes (#{user.semester} #{user.year})
+          if user.courses
+              for course in user.courses
+                  .row
+                      p.class#item 
+                          a(href= "/portal/" + user.username + "/course/" + course.course + "/")
+                              | #{course.course} - #{course.fullCourseName}
+          .row#addCourseButton
+            button.btn-primary.btn-sm(onclick='addCourse()') +
+                        
+      else 
+          .row
+              p please login
+
+    include ../common/footer.pug
+    +footer()

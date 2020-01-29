@@ -1,0 +1,60 @@
+doctype html
+html(lang='en')
+  include ../../common/head.pug
+
+  if user 
+    +head("Teacher Homepage")
+  else 
+    +head("Please login")
+
+  link(rel="stylesheet" href="/stylesheets/portal/settings.css")
+  header
+    include ../../common/navbar.pug
+    +navbar(user)
+
+  body
+    div.content 
+      if user
+          .row
+            .col-sm-3
+              h3.class Settings
+            .col-sm-9
+              h3.class Manage Account
+          .row#settings
+            .col-sm-3
+              .row
+                ul.class.list-group#settingsBar
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/account").active Manage Account  
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/archiveManage").disabled Archive Course(s)
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/archiveView").disabled View Archived Courses
+            .col-sm-9
+              .row
+                ul.class.list-group#otherSettingsBar
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/email") Email
+                    i.arrow.right
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/semester") Semester
+                    i.arrow.right
+                  a.list-group-item.list-group-item-action(href= settingsURL + "/password") Password
+                    i.arrow.right
+                  a.list-group-item.list-group-item-action.list-group-item-danger(href= settingsURL + "/deleteAccount") Delete Account
+                    i.arrow.right
+      else 
+          .row
+              p please login
+
+    include ../../common/footer.pug
+    +footer()
+
+    // manage courses 
+    // view archived courses
+    // archive entire semester (all courses)
+    // archive class(s)
+    // update semester 
+    // manage account settings
+    // change password
+    // change email
+    
+
+    // archived courses
+    // oldest to newest
+    // 

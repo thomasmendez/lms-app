@@ -1,0 +1,52 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+  +head("Login")
+  link(rel="stylesheet" href="/stylesheets/login.css")
+  script(src="/javascripts/login.js")
+  header
+    include ../common/navbar.pug
+    +navbar(user)
+  body
+    .container
+      .row
+        .col-sm-12.offset-md-2.col-md-8
+          .jumbotron
+            h2.text-center Login
+            .row
+              .col-sm-12.col-md-12.col-xs-12
+                form(action='/login', method='POST')
+                  div.formgroup
+                    if (errors && errors.message)
+                      .alert.alert-danger(role='alert')
+                        | #{errors.message}
+                    label.small.mb-1.mt-3 Username:
+                    if (formData && formData.username) 
+                      if (errors)
+                        input(placeholder='Enter your username', required=true, name='username', id='inputUsername', onInput='fieldInput()', value=formData.username, style={'border-color': 'red'}).form-control  
+                        p(id='usernameError').small.text-danger 
+                      else 
+                        input(placeholder='Enter your username', required=true, name='username', id='inputUsername', onInput='fieldInput()', value=formData.username).form-control
+                        p(id='usernameError').small.text-danger
+                    else 
+                      input(placeholder='Enter your username', required=true, name='username', id='inputUsername', onInput='fieldInput()').form-control
+                      p(id='usernameError').small.text-danger
+                    label.small.mb-1.mt-3 Password:
+                    if (formData && formData.password)
+                      if (errors)
+                        input(placeholder='Enter your current password',required=true, name='password', type='password', id='inputPassword', onInput='fieldInput()', value=formData.password, style={'border-color': 'red'}).form-control
+                        p(id='passwordError').small.text-danger 
+                      else
+                        input(placeholder='Enter your current password',required=true, name='password', type='password', id='inputPassword', onInput='fieldInput()', value=formData.password).form-control  
+                        p(id='passwordError').small.text-danger
+                    else
+                      input(placeholder='Enter your current password',required=true, name='password', type='password', id='inputPassword', onInput='fieldInput()').form-control
+                      p(id='passwordError').small.text-danger
+                    button.mt-3.btn.btn-primary(type='submit') Log in
+                    p.mt-2.mb-0
+                      | Forgot your password? #[a(href="/resetPassword") Reset here].
+                    p.m-0
+                      | Don't have an account? #[a(href="/signup") Sign up here].
+
+    include ../common/footer.pug
+    +footer()

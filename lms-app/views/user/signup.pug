@@ -1,0 +1,177 @@
+doctype html
+html(lang='en')
+  include ../common/head.pug
+  +head("Sign Up")
+  link(rel="stylesheet" href="/stylesheets/signup.css")
+  script(src="/javascripts/signup.js")
+  header
+    include ../common/navbar.pug
+    +navbar(user)
+  body
+    form(action='/signup', method='POST', id='signup')
+      .row#signUpRow
+        .col-xs-12.offset-sm-2.col-xs-12.col-sm-8.jumbotron
+          h2.text-center Sign Up
+          .row
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-6
+              label.small.mb-1.mt-3 Username:
+              if (formData && formData.username)
+                if (errors && errors.username)    
+                  input(placeholder='Please enter a username', required=true, name='username', type='text', onInput='fieldInput()', id='inputUsername', value=formData.username, style={'border-color': 'red'}).form-control   
+                  p(id='usernameError').small.text-danger #{errors.username}
+                else 
+                  input(placeholder='Please enter a username', required=true, name='username', type='text', onInput='fieldInput()', id='inputUsername', value=formData.username).form-control   
+                  p(id='usernameError').small.text-info 
+              else
+                if (errors && errors.username)     
+                  input(placeholder='Please enter a username', required=true, name='username', type='text', onInput='fieldInput()', id='inputUsername', style={'border-color': 'red'}).form-control  
+                  p(id='usernameError').small.text-danger #{errors.username}
+                else 
+                  p(id='usernameError').small.text-info 
+                  input(placeholder='Please enter a username', required=true, name='username', type='text', onInput='fieldInput()', id='inputUsername').form-control  
+
+          .row
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-6
+              label.small.mb-1.mt-3 Email:
+              if (formData && formData.email)
+                if (errors && errors.email)
+                  input(placeholder='Please enter your email', required=true, name='email', type='email', onInput='fieldInput()', id='inputEmail', value=formData.email, style={'border-color': 'red'}).form-control
+                  p(id='emailError').small.text-danger #{errors.email}
+                else 
+                  input(placeholder='Please enter your email', required=true, name='email', type='email', onInput='fieldInput()', id='inputEmail', value=formData.email).form-control
+                  p(id='emailError').small.text-danger 
+              else 
+                if (errors && errors.email)
+                  input(placeholder='Please enter your email', required=true, name='email', type='email', onInput='fieldInput()', id='inputEmail', style={'border-color': 'red'}).form-control
+                  p(id='emailError').small.text-danger #{errors.email}
+                else 
+                  input(placeholder='Please enter your email', required=true, name='email', type='email', onInput='fieldInput()', id='inputEmail').form-control
+                  p(id='emailError').small.text-danger 
+          .row
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-6
+              label.small.mb-1.mt-3 Password:
+              if (formData && formData.password)
+                if (errors && errors.password)
+                  input(placeholder='Please enter a password',required=true, name='password', type='password', onInput='fieldInput()', id='inputPassword', value=formData.password, style={'border-color': 'red'}).form-control
+                  p(id='passwordError').small.text-danger #{errors.password} 
+                else 
+                  input(placeholder='Please enter a password',required=true, name='password', type='password', onInput='fieldInput()', id='inputPassword', value=formData.password).form-control
+                  p(id='passwordError').small.text-info Requires 1 lower, 1 upper, 1 digit, 1 special character, and must be at least 6 characters long
+              else 
+                if (errors && errors.password)
+                  input(placeholder='Please enter a password',required=true, name='password', type='password', onInput='fieldInput()', id='inputPassword', style={'border-color': 'red'}).form-control
+                  p(id='passwordError').small.text-danger #{errors.password} 
+                else 
+                  input(placeholder='Please enter a password',required=true, name='password', type='password', onInput='fieldInput()', id='inputPassword').form-control
+                  p(id='passwordError').small.text-info Requires 1 lower, 1 upper, 1 digit, 1 special character, and must be at least 6 characters long
+          .row
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-6
+              label.small.mb-1.mt-3 Confirm Password:
+              if (formData && formData.confirmPassword)
+                if (errors && errors.confirmPassword)
+                  input(placeholder='Please confirm password',required=true, name='confirmPassword', type='password', onInput='fieldInput()', id='inputConfirmPassword', value=formData.confirmPassword, style={'border-color': 'red'}).form-control
+                  p(id='confirmPasswordError').small.text-danger #{errors.confirmPassword}
+                else 
+                  input(placeholder='Please confirm password',required=true, name='confirmPassword', type='password', onInput='fieldInput()', id='inputConfirmPassword', value=formData.confirmPassword).form-control
+                  p(id='confirmPasswordError').small.text-danger 
+              else 
+                if (errors && errors.confirmPassword)
+                  input(placeholder='Please confirm password',required=true, name='confirmPassword', type='password', onInput='fieldInput()', id='inputConfirmPassword', style={'border-color': 'red'}).form-control
+                  p(id='confirmPasswordError').small.text-danger #{errors.confirmPassword}
+                else 
+                  input(placeholder='Please confirm password',required=true, name='confirmPassword', type='password', onInput='fieldInput()', id='inputConfirmPassword').form-control
+                  p(id='confirmPasswordError').small.text-danger 
+          .row
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-6
+              label.small.mb-1.mt-3 First Name:
+              if (formData && formData.firstName)
+                if (errors && errors.firstName)
+                  input(placeholder='First name', required=true, name='firstName', type='text', onInput='fieldInput()', id='inputFirstName', value=formData.firstName, style={'border-color': 'red'}).form-control 
+                  p(id='firstNameError').small.text-danger #{errors.firstName}   
+                else 
+                  input(placeholder='First name', required=true, name='firstName', type='text', onInput='fieldInput()', id='inputFirstName', value=formData.firstName).form-control 
+                  p(id='firstNameError').small.text-danger 
+              else
+                if (errors && errors.firstName)
+                  input(placeholder='First name', required=true, name='firstName', type='text', onInput='fieldInput()', id='inputFirstName', style={'border-color': 'red'}).form-control 
+                  p(id='firstNameError').small.text-danger #{errors.firstName}   
+                else 
+                  input(placeholder='First name', required=true, name='firstName', type='text', onInput='fieldInput()', id='inputFirstName').form-control 
+                  p(id='firstNameError').small.text-danger 
+          .row
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-6
+              label.small.mb-1.mt-3 Last Name:
+              if (formData && formData.lastName)
+                if (errors && errors.lastName)
+                  input(placeholder='Last name', required=true, name='lastName', type='text', onInput='fieldInput()', id='inputLastName', value=formData.lastName, style={'border-color': 'red'}).form-control
+                  p(id='lastNameError').small.text-danger #{errors.lastName} 
+                else 
+                  input(placeholder='Last name', required=true, name='lastName', type='text', onInput='fieldInput()', id='inputLastName', value=formData.lastName).form-control
+                  p(id='lastNameError').small.text-danger 
+              else
+                if (errors && errors.lastName)
+                  input(placeholder='Last name', required=true, name='lastName', type='text', onInput='fieldInput()', id='inputLastName', style={'border-color': 'red'}).form-control
+                  p(id='lastNameError').small.text-danger #{errors.lastName} 
+                else 
+                  input(placeholder='Last name', required=true, name='lastName', type='text', onInput='fieldInput()', id='inputLastName').form-control
+                  p(id='lastNameError').small.text-danger 
+          .row
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-3
+              label.small.mb-1.mt-3 Semester:
+              .radio
+                label.medium.mb-1
+                  if (formData && formData.semester)
+                    if (formData.semester === 'Fall')
+                      input(type='radio', name='semester', value='Fall', id='fall', checked='checked')
+                      |  Fall
+                    else 
+                      input(type='radio', name='semester', value='Fall', id='fall')
+                      |  Fall
+                  else 
+                    input(type='radio', name='semester', value='Fall', id='fall')
+                    |  Fall
+              .radio
+                label.medium.mb-1
+                  if (formData && formData.semester)
+                    if (formData.semester === 'Spring')
+                      input(type='radio', name='semester', value='Spring', id='spring', checked='checked')
+                      |  Spring
+                    else 
+                      input(type='radio', name='semester', value='Spring', id='spring')
+                      |  Spring
+                  else 
+                    input(type='radio', name='semester', value='Spring', id='spring')
+                    |  Spring
+              .radio
+                label.medium.mb-1
+                  if (formData && formData.semester)
+                    if (formData.semester === 'Full-Year')
+                      input(type='radio', name='semester', value='Full-Year', id='full-year', checked='checked')
+                      |  Full-Year
+                    else 
+                      input(type='radio', name='semester', value='Full-Year', id='full-year')
+                      |  Full-Year
+                  else 
+                    input(type='radio', name='semester', value='Full-Year', id='full-year')
+                    |  Full-Year
+              if (errors && errors.semester)
+                p(id='semesterError').small.text-danger #{errors.semester}
+              else 
+                p(id='semesterError').small.text-danger
+            .col-sm-3
+              label.small.mb-1.mt-3 Year:
+                select(name='year' id='yearOptions').form-control
+                  option(value='')
+                  option(value='')
+              if(errors && errors.year)
+                p(id='yearError').small.text-danger #{errors.year}
+              else 
+                p(id='yearError').small.text-danger 
+          .row 
+            .col-xs-12.offset-sm-3.col-xs-12.col-sm-6
+              button.mt-3.btn.btn-primary(type='submit') Sign up
+              p.mt-2.mb-0
+                | Already have an account? #[a(href="/signup") Log in here].
+
+    include ../common/footer.pug
+    +footer()

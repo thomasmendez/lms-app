@@ -1,0 +1,28 @@
+doctype html
+html(lang='en')
+  include ./common/head.pug
+  +head("Teacher Database")
+  link(rel="stylesheet" href="/stylesheets/index.css")
+  header
+    include ./common/navbar.pug
+    +navbar(user)
+  body
+    
+    div.content 
+      div.row#schoolRow
+        div.col-xs-12.col-sm-4
+          h3 School Name
+        div.col-xs-12.col-sm-4
+          
+        div.col-xs-12.col-sm-4
+      div.row
+        div.col-xs-12.col-sm-4
+          h4 Teachers
+          if teachers
+          for teacher in teachers
+            p.class#item 
+              a(href="/teacher/" + teacher.username + "/")
+                | #{teacher.firstName} #{teacher.lastName}
+                
+    include ./common/footer.pug
+    +footer()

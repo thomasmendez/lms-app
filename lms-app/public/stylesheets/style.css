@@ -1,0 +1,40 @@
+body {
+  /*
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  */
+
+  padding: 0px;
+
+}
+
+.col-sm-4, .com-sm-3, .col-sm-2, .col-sm-1 {
+  padding: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p {
+  margin: 0px;
+}
+
+label {
+  display: block;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.content {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.row {
+  padding-left: 10px;
+  padding-top: 10px;
+}
