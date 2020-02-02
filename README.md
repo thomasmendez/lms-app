@@ -110,13 +110,66 @@ git clone <https_link>
 
     d. (Optional) Use MongoDB Compass Community to view information that was stored in the school collection
 
-4. Unit Testing
+## Unit Testing
 
-    a. In terminal where lms-app folder is located run
+Unit testing is done with the javascript frameworks Mocha and Chai
+
+1. In terminal where lms-app folder is located run
 
     ```
     npm test
     ```
+    
+## Features
+
+Currently the web application does not have all of the neccessary features. The following shows current features for the application and future features that would be added in the near future: 
+
+* Teacher Sign Up
+    - [x] Strong Password Required
+    - [x] Front and Back End Form Verification
+    - [ ] Send Email Account Confirmation
+* Teacher Login
+    - [x] Front and Back End Form Verification
+    - [ ] Send Forgot Password Link to Email
+* Teacher Page
+    * Courses
+        - [x] Add Course(s)
+    * Syllabus
+        - [x] Add Syllabus
+        - [x] Update Syllabus
+    * Schedule
+        - [x] Add Schedule
+        - [x] Update Schedule
+    * Assignments
+        - [x] Add Assignment
+        - [x] Remove Assignment
+        - [ ] Reorder Assignments
+        - [ ] Update Assignment
+    * Lecture Notes
+        - [x] Add Lecture Note
+        - [x] Remove Lecture Note
+        - [ ] Reorder Lecture Notes
+        - [ ] Update Lecture Note
+    * Class Notes
+        - [x] Add Class Note
+        - [x] Remove Class Note
+        - [ ] Reorder Class Notes
+        - [ ] Update Class Note
+    * Other Files
+        - [x] Add Lecture Note
+        - [x] Remove Other File
+        - [ ] Reorder Other Files
+        - [ ] Update Other File
+* User Settings
+    * Manage Account
+        - [x] Update Email
+        - [x] Update Semester
+        - [x] Update Password
+        - [x] Delete Account
+    * Archived Course(s)
+        - [ ] Archive a Course
+    * View Archived Course(s)
+        - [ ] View Archived Course(s)
 
 ## Built With
 
@@ -134,6 +187,11 @@ Frontend
 
 * [PUG](https://pugjs.org/api/getting-started.html) - HTML Templating Engine
 * [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/) - CSS Framework
+
+Unit Testing
+
+* [Mocha](https://mochajs.org/) - JavaScript Test Framework
+* [Chai](https://www.chaijs.com/) -  BDD / TDD Assertion Library
 
 ## Authors
 
