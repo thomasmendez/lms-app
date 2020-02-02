@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-let config = require('../config/config');
-mongoose.connect(config.development.url + config.development.database, {useNewUrlParser: true});
+//let config = require('../config/config');
+//mongoose.connect(config.development.url + config.development.database, {useNewUrlParser: true});
 
 // import models that will be used
 // all models will need their schema to make a query search
@@ -32,14 +32,52 @@ exports.addCourse = function(username, course, fullCourseName) {
                 fullCourseName: fullCourseName}
             ] 
         }}, 
-        //options, 
+        {new: true, useFindAndModify: false},
         //callback)
     ).then(function (items) {
-
         return items;
+    }).catch(function(error) {
+        return error
+    });
 
-    })
-    
+}
+
+exports.addSyllabus = function(course, syllabusFileID, filename, uploadDate) {
+
+    return mongoose.model('teachers', Teacher.schema).findOneAndUpdate(
+        {"courses.course": course},
+        {"courses.$.syllabus": 
+            {
+                syllabusFile: filename,
+                fileID: syllabusFileID,
+                uploadDate: uploadDate
+            }
+        }, 
+        {new: true, useFindAndModify: false}
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
+}
+
+exports.addSchedule = function(course, scheduleFileID, filename, uploadDate) {
+
+    return mongoose.model('teachers', Teacher.schema).findOneAndUpdate(
+        {"courses.course": course},
+        {"courses.$.schedule": 
+            {
+                scheduleFile: filename,
+                fileID: scheduleFileID,
+                uploadDate: uploadDate
+            }
+        }, 
+        {new: true, useFindAndModify: false}
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 }
 
 exports.addAssignment = function(course, assignmentFileID, assignmentName, filename, dueDate) {
@@ -55,45 +93,14 @@ exports.addAssignment = function(course, assignmentFileID, assignmentName, filen
                             ]
                 }
         }, 
-        {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        });
+        {new: true, useFindAndModify: false},
+        //callback)
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
     
-}
-
-exports.addSyllabus = function(course, syllabusFileID, filename, uploadDate) {
-
-    return mongoose.model('teachers', Teacher.schema).findOneAndUpdate(
-        {"courses.course": course},
-        {"courses.$.syllabus": 
-            {
-                syllabusFile: filename,
-                fileID: syllabusFileID,
-                uploadDate: uploadDate
-            }
-        }, 
-        {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        });
-}
-
-exports.addSchedule = function(course, scheduleFileID, filename, uploadDate) {
-
-    return mongoose.model('teachers', Teacher.schema).findOneAndUpdate(
-        {"courses.course": course},
-        {"courses.$.schedule": 
-            {
-                scheduleFile: filename,
-                fileID: scheduleFileID,
-                uploadDate: uploadDate
-            }
-        }, 
-        {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        });
 }
 
 exports.removeAssignment = function(course, assignmentID) {
@@ -102,11 +109,11 @@ exports.removeAssignment = function(course, assignmentID) {
         {"courses.course": course},
         {$pull: {"courses.$.assignments": {'_id': assignmentID} }}, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        }
-    );
-
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 }
 
 exports.addLectureNote = function(course, lectureNoteFileID, lectureNoteName, filename, noteDate) {
@@ -123,9 +130,11 @@ exports.addLectureNote = function(course, lectureNoteFileID, lectureNoteName, fi
                 }
         }, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        });
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
     
 }
 
@@ -135,13 +144,12 @@ exports.removeLectureNote = function(course, lectureNoteID) {
         {"courses.course": course},
         {$pull: {"courses.$.lectureNotes": {'_id': lectureNoteID} }},
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        }
-    );
-
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 }
-
 
 exports.addClassNote = function(course, classNoteFileID, classNoteName, filename, noteDate) {
 
@@ -157,9 +165,11 @@ exports.addClassNote = function(course, classNoteFileID, classNoteName, filename
                 }
         }, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        });
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
     
 }
 
@@ -169,10 +179,11 @@ exports.removeClassNote = function(course, classNoteID) {
         {"courses.course": course},
         {$pull: {"courses.$.classNotes": {'_id': classNoteID} }},
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        }
-    );
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 
 }
 
@@ -190,9 +201,11 @@ exports.addOtherNote = function(course, otherNoteFileID, otherNoteName, filename
                 }
         }, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        });
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
     
 }
 
@@ -202,10 +215,11 @@ exports.removeOtherNote = function(course, otherNoteID) {
         {"courses.course": course},
         {$pull: {"courses.$.otherNotes": {'_id': otherNoteID} }}, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        }
-    );
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 
 }
 
@@ -217,10 +231,11 @@ exports.updateEmail = function(username, newEmail) {
         query,
         {$set: {email: newEmail} }, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        }
-    );
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 }
 
 exports.updateSemester = function(username, semester, year) {
@@ -234,10 +249,11 @@ exports.updateSemester = function(username, semester, year) {
             }
         }, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        }
-    );
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 }
 
 exports.updatePassword = function(username, newHashedPassword) {
@@ -250,18 +266,20 @@ exports.updatePassword = function(username, newHashedPassword) {
             }
         }, 
         {new: true, useFindAndModify: false}
-        ).then(function (items) {
-            return items;
-        }
-    );
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 }
 
 exports.deleteUser = function(password) {
     let query = {password: password};
     return mongoose.model('teachers', Teacher.schema).findOneAndDelete(
         query
-        ).then(function (items) {
-            return items;
-        }
-    );
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
+    });
 }

@@ -1,4 +1,4 @@
-# ClassApp 
+# lms-app 
 
 This web application is intented to simplify the creation of teacher websites for a school in order to increase productivity in teaching and learning for both the teacher and the students. This application can hold information for all the teachers for a school and documents that students would need in order to succeed in the course. 
 
@@ -25,7 +25,7 @@ In order to create an account, a teacher would go to the signup page and fill ou
 * Semester
 * Year 
 
-![Create Account Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/Signup.png)
+![Create Account Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Signup.png)
 
 ### Login
 
@@ -42,7 +42,7 @@ The teacher can then click the 'add course button' and the teacher will see that
 
 If a teacher happens to teach multiple courses, they can just click on the '+' button again and add more courses if needed. A guest will be able to see all of the courses that the teacher teaches in their homepage. 
 
-![Create Course Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/CreateClass.png)
+![Create Course Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/CreateClass.png)
 
 ### Managing a Course
 
@@ -64,7 +64,7 @@ After creating a course, the teacher can upload and update relevant files for th
 
 *Note: If the syllabus ever needs to be updated, click the 'update' button and upload a new syllabus file to replace the old one. The date in which it was uploaded will be shown for personal reference.*
 
-![Add Syllabus Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/Syllabus.png)
+![Add Syllabus Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Syllabus.png)
 
 #### Schedule (Upload / Update)
 
@@ -82,7 +82,7 @@ After creating a course, the teacher can upload and update relevant files for th
 
 *Note: If the schedule ever needs to be updated, click the 'update' button and upload a new schedule file to replace the old one. The date in which it was uploaded will be shown for personal reference.*
 
-![Add Schedule Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/Schedule.png)
+![Add Schedule Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Schedule.png)
 
 #### Assignments (Upload / Delete)
 
@@ -104,7 +104,7 @@ After creating a course, the teacher can upload and update relevant files for th
 
 *Note: Currently the assignment cannot be updated, but can be deleted and a new assignment can be added again.*
 
-![Add Assignments Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/Assignments.png)
+![Add Assignments Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Assignments.png)
 
 #### Lecture Notes (Upload / Delete)
 
@@ -126,7 +126,7 @@ After creating a course, the teacher can upload and update relevant files for th
 
 *Note: Currently the lecture note cannot be updated, but can be deleted and a new lecture note can be added again.*
 
-![Add Lecture Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/Lecture%20Notes.png)
+![Add Lecture Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Lecture%20Notes.png)
 
 #### Class Notes (Upload / Delete)
 
@@ -148,7 +148,7 @@ After creating a course, the teacher can upload and update relevant files for th
 
 *Note: Currently the class note cannot be updated, but can be deleted and a new class note can be added again.*
 
-![Add Class Notes Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/Class%20Notes.png)
+![Add Class Notes Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Class%20Notes.png)
 
 #### Other Files (Upload / Delete)
 
@@ -170,7 +170,7 @@ After creating a course, the teacher can upload and update relevant files for th
 
 *Note: Currently the uploaded file cannot be updated, but can be deleted and a new file can be added again.*
 
-![Create Other Files Image](https://github.com/thomasmendez/ClassApp/blob/master/markdown/images/Other%20Files.png)
+![Create Other Files Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Other%20Files.png)
 
 ## Future Features 
 

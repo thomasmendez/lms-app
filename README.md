@@ -1,6 +1,6 @@
-# ClassApp
+# lms-app
 
-NodeJS app that allows the creation of dynamic websites for teacher use. Ideally, schools can internally use this application to have their teachers host their own website to store and organize files for students, teachers, and parents to view and download. For more information as to how a teacher can manage their website and features they can take of advantage of, please view the [TEACHER README.md](https://github.com/thomasmendez/ClassApp/blob/master/TEACHER%20README.md) file. 
+NodeJS app that allows the creation of dynamic websites for teacher use. Ideally, schools can internally use this application to have their teachers host their own website to store and organize files for students, teachers, and parents to view and download. For more information as to how a teacher can manage their website and features they can take of advantage of, please view the [TEACHER README.md](https://github.com/thomasmendez/lms-app/blob/master/TEACHER%20README.md) file. 
 
 ## Getting Started
 
@@ -54,9 +54,9 @@ git clone <https_link>
 
 4. Install Node.js Packages
 
-    a. Open terminal where classapp folder is located
+    a. Open terminal where lms-app folder is located
 
-    b. Download required Node.js packages by running in terminal in classapp folder (you will see a new folder called node_modules)
+    b. Download required Node.js packages by running in terminal in lms-app folder (you will see a new folder called node_modules)
 
     ```
     npm install 
@@ -80,9 +80,9 @@ git clone <https_link>
 
     c. Keep termnial open in order to write and read from database. In order to close database, use control+C
 
-2. Run ClassApp Application 
+2. Run lms-app Application 
 
-    a. In terminal where classapp folder is located run
+    a. In terminal where lms-app folder is located run
 
     ```
     npm start
@@ -110,6 +110,14 @@ git clone <https_link>
 
     d. (Optional) Use MongoDB Compass Community to view information that was stored in the school collection
 
+4. Unit Testing
+
+    a. In terminal where lms-app folder is located run
+
+    ```
+    npm test
+    ```
+
 ## Built With
 
 Backend
@@ -133,4 +141,4 @@ Frontend
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/thomasmendez/ClassApp/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/thomasmendez/lms-app/blob/master/LICENSE) file for details

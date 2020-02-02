@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
-let config = require('../../config/config');
-mongoose.connect(config.development.url + config.development.database, {useNewUrlParser: true});
+// let config = require('../../config/config');
+// mongoose.connect(config.development.url + config.development.database, {useNewUrlParser: true});
 
 let Schema = mongoose.Schema;
 
 const teachersSchema = new Schema({
-    username: String,
-    password: String,
-    email: String,
-    firstName: String,
-    lastName: String,
-    semester: String,
-    year: String,
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    email: { type: String, required: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    semester: { type: String, required: true },
+    year: { type: String, required: true },
     courses: [{
         course: String,
         fullCourseName: String,
