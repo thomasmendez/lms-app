@@ -339,11 +339,57 @@ exports.addCourse = function(req, res, next) {
 
 		let courseFullName = req.body.courseFullName;
 
-		mongodb.addCourse(username, course, courseFullName).then(function(result) {
+		// see if a course exist then 
+		mongodb.findCourse(course).then(function (result) {
 
-			res.redirect('/portal/' + req.user.username)
+			// if the course does not exist in database add it
+			if (result === null) {
 
+				mongodb.addCourse(username, course, courseFullName).then(function(result) {
+
+					res.redirect('/portal/' + req.user.username);
+		
+				});
+
+			} else {
+
+				let message = "Course " + course + " already exist in the database. Please make sure the correct course ID is included.";
+				let err = {
+					message: message
+				}
+
+				res.render('portal/home', {
+					user: result,
+					errors: err
+				});
+
+			}
+
+		}).catch(function (error) {
+			let message = "An error occured please try again."
+			let err = {
+				message: message
+			}
+			res.render('portal/home', {
+				user: req.user,
+				errors: err
+			});
 		});
+
+	} else {
+
+		// return user to login page
+		res.redirect('/login')
+
+	}
+
+}
+
+exports.addCourseRedirect = function(req, res, next) {
+
+	if (req.user !== undefined) {
+
+		res.redirect('/portal/' + req.user.username);
 
 	} else {
 

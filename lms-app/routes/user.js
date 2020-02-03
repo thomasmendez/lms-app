@@ -21,8 +21,8 @@ router.post('/removeOtherNote', user.removeOtherNote);
 
 // if there was an error (session ended maybe)
 // user might try a get request
-// send them to login page
-router.get('/addCourse', user.login);
+// try to send them back where they where
+router.get('/addCourse', user.addCourseRedirect);
 router.get('/addSyllabus', user.login);
 router.get('/updateSyllabus', user.login);
 router.get('/addSchedule', user.login);

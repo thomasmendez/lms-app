@@ -146,6 +146,18 @@ describe('Database Tests', function() {
       });
     });
 
+    it ('Course does not exist yet', function(done) {
+        mongodb.findCourse(course).then(function(result) {     
+            if (result === null) {
+                done();
+            } else {
+                throw new Error('Course exist already!');
+            }
+        }).catch(function(error) { 
+          throw new Error("MongoDB error: " + error);
+        });
+    });
+
     it('Add course to teacher document', function(done) {
       mongodb.addCourse(username, course, fullCourseName).then(function(teacher) {        
         if(teacher.courses.length === 0) {

@@ -17,6 +17,18 @@ exports.findTeacherById = function(_id) {
 exports.findTeacherByUsername = function(username) {
     return mongoose.model('teachers', Teacher.schema).findOne({username: username}).then(function(items) {
         return items;
+    }).catch(function (error) {
+        return error;
+    });
+}
+
+exports.findCourse = function(course) {
+    return mongoose.model('teachers', Teacher.schema).findOne(
+        {"courses.course": course}
+    ).then(function (items) {
+        return items;
+    }).catch(function (error) {
+        return error;
     });
 }
 

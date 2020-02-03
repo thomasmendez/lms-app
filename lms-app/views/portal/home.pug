@@ -15,6 +15,14 @@ html(lang='en')
 
   body
     div.content 
+      if (success && success.message)
+        .row
+          .alert.alert-success(role='alert', style={'width': '100%'})
+            | #{success.message}
+      else if (errors && errors.message)
+        .row
+          .alert.alert-danger(role='alert', style={'width': '100%'})
+            | #{errors.message}
       if user
           .row
             h3.class#item #{user.firstName} #{user.lastName}
