@@ -171,14 +171,3 @@ After creating a course, the teacher can upload and update relevant files for th
 *Note: Currently the uploaded file cannot be updated, but can be deleted and a new file can be added again.*
 
 ![Create Other Files Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/Other%20Files.png)
-
-## Future Features 
-
-Currently the web application does not have all of the neccessary features. The following features will be added in the near future: 
-
-* Create user settings page
-* Force users to create stronger passwords when signing up
-* Have signup have option between Fall / Spring / Fall and Spring
-* Email Confirmation in case password needs to be reset
-* Allow User to Reset Password
-* Allow assignments to be reordered and updated 
