@@ -23,7 +23,7 @@ html(lang='en')
             for assignment in assignments.assignments
               tr
                 td 
-                  a(href= currentURL + "/id/" + assignment.assignmentFileID + "/files/" + assignment.assignmentFile) #{assignment.assignmentName} 
+                  a(href= currentURL + "/id/" + assignment.fileID + "/files/" + assignment.assignmentFile) #{assignment.assignmentName} 
                 td #{assignment.dueDate}
         
   include ../common/footer.pug

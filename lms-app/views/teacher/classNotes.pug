@@ -23,7 +23,7 @@ html(lang='en')
             for classNote in classNotes.classNotes
               tr
                 td 
-                  a(href= currentURL + "/id/" + classNote.noteFileID + "/files/" + classNote.noteFile) #{classNote.noteName} 
+                  a(href= currentURL + "/id/" + classNote.fileID + "/files/" + classNote.noteFile) #{classNote.noteName} 
                 td #{classNote.noteDate}
         
   include ../common/footer.pug
