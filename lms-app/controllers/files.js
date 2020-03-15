@@ -31,44 +31,80 @@ exports.getFile = function(req, res, next) {
 
     var filename = url.substring(filesIndex + 7, url.length);
 
-    // check if the id and filesname are undefined 
-
-    if (fileID === 'undefined' || filename === 'undefined') {
-        res.status(404).send('File Not Found');
-        return;
-    }
     
-    var gfs = Grid(conn.db);
+    checkIfFileIsDefined(fileID, filename)
+    .then(success => {
+        var gfs = Grid(conn.db);
+        checkIfFileExist(res, gfs, fileID, filename)
+        .then(newPath => {
+            removeTempFile(newPath)
+        })
+        .catch(error => {
+            res.status(404).send(error);
+        })
+    })
+    .catch(error => {
+        res.status(404).send(error);
+    })
+    
+}
 
-    gfs.exist({ _id: fileID, filename: filename }, (err, file) => {
+function checkIfFileIsDefined(fileID, filename) {
+    
+    return new Promise((resolve, reject) => {
         
-        if (err || !file) {
-            res.status(404).send('File Not Found');
-            return;
+        if (fileID === 'undefined' || filename === 'undefined') {
+            let error = "File Not Found";
+            reject(error)
         }
 
-        var newPath = path.join(__dirname, '../temp/' + filename);
+        let message = "File is defined";
+        resolve(message)
 
-        var fs_write_stream = fs.createWriteStream(newPath);
+    })
 
-        var readstream = gfs.createReadStream({
-            // the name of the file in database
-            _id: fileID,
-            filename: filename
+}
+
+function checkIfFileExist(res, gfs, fileID, filename) {
+
+    return new Promise((resolve, reject) => {
+
+        return gfs.exist({ _id: fileID, filename: filename }, (err, file) => {
+        
+            if (err || !file) {
+                let error = "File Not Found"
+                reject(error)
+            }
+    
+            var newPath = path.join(__dirname, '../temp/' + filename);
+    
+            var fs_write_stream = fs.createWriteStream(newPath);
+    
+            var readstream = gfs.createReadStream({
+                // the name of the file in database
+                _id: fileID,
+                filename: filename
+            });
+    
+            readstream.pipe(fs_write_stream);
+    
+            // pipe out the file retrieved from mongoDB and allow user to view 
+            readstream.pipe(res);
+
+            // return the new path that has the file
+            resolve(newPath)
+    
         });
 
-        readstream.pipe(fs_write_stream);
-
-        // pipe out the file retrieved from mongoDB and allow user to view 
-        readstream.pipe(res);
-
-	    try {
-	    	fs.unlinkSync(newPath)
-	    	//console.log("file removed from temp directory");
-	      } catch(err) {
-	    	console.error("File removal error: " + err)
-        }
-
     });
-    
+
+}
+
+function removeTempFile(filepath) {
+    try {
+        fs.unlinkSync(filepath);
+        //console.log("file removed from temp directory");
+      } catch(err) {
+        console.error("File removal error: " + err);
+    }
 }

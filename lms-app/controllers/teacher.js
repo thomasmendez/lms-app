@@ -4,8 +4,7 @@ exports.getHome = function (req, res, next) {
 
     let url = req.originalUrl;
 
-    // /teacher - 9
-    let teacherUsername = url.substring(9, url.length - 1);
+    let teacherUsername = urlFilterUsername(url);
 
     // call database query, search for classes that the teacher teaches
     
@@ -18,8 +17,6 @@ exports.getHome = function (req, res, next) {
             year: teacher.year,
             courses: teacher.courses
         };
-
-        let course = teacher.courses;
     
         // pass over teacher username and if the response has a logged in user, send it also 
         res.render('teacher/home', {
@@ -36,19 +33,10 @@ exports.getCourse = function(req, res, next) {
 
     let url = decodeURI(req.originalUrl);
 
-    // /teacher - 9
-    // url is longer, so remove extra 
-    var teacherUsername = url.substring(9, url.length - 1);
+    let teacherUsername = urlFilterUsername(url);
 
-    let teacherSlash = teacherUsername.search('/');
-
-    // /course/ - 8
-    var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-    searchedCourse = searchedCourse.substring(8, searchedCourse.length);
-
-    teacherUsername = teacherUsername.substring(0, teacherSlash);
-
+    let searchedCourse = urlFilterCourse(url);
+    
     // call database query teacher and class 
     // call database query, search for classes that the teacher teaches
 
@@ -89,22 +77,9 @@ exports.getSyllabus = function (req, res, next) {
 
     let url = decodeURI(req.originalUrl);
 
-    // /teacher/ - 9
-    // url is longer, so remove extra 
-    var teacherUsername = url.substring(9, url.length);
+    let teacherUsername = urlFilterUsername(url);
 
-    let teacherSlash = teacherUsername.search('/');
-
-    teacherUsername = teacherUsername.substring(0, teacherSlash);
-
-    // /course/ - 8 
-    var searchedCourse = url.search('/course/');
-
-    searchedCourse = url.substring(searchedCourse + 8, url.length);
-
-    var seachedCourseSlash = searchedCourse.search('/');
-
-    searchedCourse = searchedCourse.substring(0, seachedCourseSlash);
+    let searchedCourse = urlFilterCourse(url);
 
     var syllabusInfo;
 
@@ -125,7 +100,7 @@ exports.getSyllabus = function (req, res, next) {
             }
         });
 
-        let syllabusFileID = syllabusInfo.syllabus.syllabusFileID;
+        let syllabusFileID = syllabusInfo.syllabus.fileID;
         let syllabusFilename = syllabusInfo.syllabus.syllabusFile;
 
         // create a new url to get the file 
@@ -139,22 +114,9 @@ exports.getSchedule = function (req, res, next) {
     
     let url = decodeURI(req.originalUrl);
 
-    // /teacher/ - 9
-    // url is longer, so remove extra 
-    var teacherUsername = url.substring(9, url.length);
+    let teacherUsername = urlFilterUsername(url);
 
-    let teacherSlash = teacherUsername.search('/');
-
-    teacherUsername = teacherUsername.substring(0, teacherSlash);
-
-    // /course/ - 8 
-    var searchedCourse = url.search('/course/');
-
-    searchedCourse = url.substring(searchedCourse + 8, url.length);
-
-    var seachedCourseSlash = searchedCourse.search('/');
-
-    searchedCourse = searchedCourse.substring(0, seachedCourseSlash);
+    let searchedCourse = urlFilterCourse(url);
 
     var scheduleInfo;
 
@@ -175,7 +137,7 @@ exports.getSchedule = function (req, res, next) {
             }
         });
 
-        let scheduleFileID = scheduleInfo.schedule.scheduleFileID;
+        let scheduleFileID = scheduleInfo.schedule.fileID;
         let scheduleFilename = scheduleInfo.schedule.scheduleFile;
 
         // create a new url to get the file 
@@ -189,18 +151,12 @@ exports.getAssignments = function (req, res, next) {
 
     let url = decodeURI(req.originalUrl);
 
-    // /teacher/ - 9
-    var teacherUsername = url.substring(9, url.length);
+    let teacherUsername = urlFilterUsername(url);
 
-    var teacherSlash = teacherUsername.search('/');
-
-    teacherUsername = teacherUsername.substring(0, teacherSlash);
-
-    // /assignments - 12
-    var searchedCourseIndex = url.indexOf('/course/');
-    var searchedCourse = url.substring(searchedCourseIndex + 8, url.length - 12);
-
+    let searchedCourse = urlFilterCourse(url);
+    
     var assignmentInfo;
+
     mongodb.findTeacherByUsername(teacherUsername).then(function (teacher) {
         // teachers is a javascript Object
         Object.entries(teacher.courses).forEach(entry => {
@@ -225,19 +181,13 @@ exports.getAssignments = function (req, res, next) {
 }
 
 exports.getLectureNotes = function (req, res, next) {
+
     let url = decodeURI(req.originalUrl);
 
-    // /teacher/ - 9
-    var teacherUsername = url.substring(9, url.length);
+    let teacherUsername = urlFilterUsername(url);
 
-    var teacherSlash = teacherUsername.search('/');
-
-    teacherUsername = teacherUsername.substring(0, teacherSlash);
-
-    // /lectureNotes - 13
-    var searchedCourseIndex = url.indexOf('/course/');
-    var searchedCourse = url.substring(searchedCourseIndex + 8, url.length - 13);
-
+    let searchedCourse = urlFilterCourse(url);
+    
     var lectureNotesInfo;
 
     mongodb.findTeacherByUsername(teacherUsername).then(function (teacher) {
@@ -264,19 +214,13 @@ exports.getLectureNotes = function (req, res, next) {
 }
 
 exports.getClassNotes = function (req, res, next) {
+
     let url = decodeURI(req.originalUrl);
 
-    // /teacher/ - 9
-    var teacherUsername = url.substring(9, url.length);
+    let teacherUsername = urlFilterUsername(url);
 
-    var teacherSlash = teacherUsername.search('/');
-
-    teacherUsername = teacherUsername.substring(0, teacherSlash);
-
-    // /classNotes - 11
-    var searchedCourseIndex = url.indexOf('/course/');
-    var searchedCourse = url.substring(searchedCourseIndex + 8, url.length - 11);
-
+    let searchedCourse = urlFilterCourse(url);
+    
     var classNotesInfo;
 
     mongodb.findTeacherByUsername(teacherUsername).then(function (teacher) {
@@ -304,19 +248,13 @@ exports.getClassNotes = function (req, res, next) {
 }
 
 exports.getOtherNotes = function (req, res, next) {
+    
     let url = decodeURI(req.originalUrl);
 
-    // /teacher/ - 9
-    var teacherUsername = url.substring(9, url.length);
+    let teacherUsername = urlFilterUsername(url);
 
-    var teacherSlash = teacherUsername.search('/');
-
-    teacherUsername = teacherUsername.substring(0, teacherSlash);
-
-    // /otherNotes - 11
-    var searchedCourseIndex = url.indexOf('/course/');
-    var searchedCourse = url.substring(searchedCourseIndex + 8, url.length - 11);
-
+    let searchedCourse = urlFilterCourse(url);
+    
     var otherNotesInfo;
 
     mongodb.findTeacherByUsername(teacherUsername).then(function (teacher) {
@@ -341,4 +279,36 @@ exports.getOtherNotes = function (req, res, next) {
         });
     });
 
+}
+
+function urlFilterUsername(url) {
+    
+    // /teacher/ - 9
+    var searchedUsername = url.substring();
+
+    let teacherSlash = searchedUsername.search('/teacher/');
+
+    searchedUsername = searchedUsername.substring(teacherSlash + 9, searchedUsername.length);
+
+    var tempSlash = searchedUsername.search('/');
+
+    searchedUsername = searchedUsername.substring(0, tempSlash);
+
+    return searchedUsername;
+}
+
+function urlFilterCourse(url) {
+    
+    // /course/ - 8
+    let searchedCourse = url.substring();
+
+    let courseSlash = searchedCourse.search('/course/');
+
+    searchedCourse = searchedCourse.substring(courseSlash + 8, searchedCourse.length);
+
+    var tempSlash = searchedCourse.search('/');
+
+    searchedCourse = searchedCourse.substring(0, tempSlash);
+
+    return searchedCourse;
 }

@@ -42,11 +42,11 @@ html(lang='en')
                 .alert.alert-danger(role='alert', style={'width': '50%'})
                   | #{errors.message}
               .row
-                if (success && success.email)
-                  p#format Current email: #{success.email}
-                else 
-                  p#format Current email: #{user.email}
                 form(action= settingsURL + '/update/email', method='POST', id='updateEmail')
+                  if (success && success.email)
+                    p#format Current email: #{success.email}
+                  else 
+                    p#format Current email: #{user.email}
                     .row
                       .col-xs-12.col-xs-12.col-sm-6
                         label.small.mb-1.mt-3 Email:
@@ -102,4 +102,3 @@ html(lang='en')
 
     // archived courses
     // oldest to newest
-    // 

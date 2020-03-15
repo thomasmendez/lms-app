@@ -40,24 +40,7 @@ exports.getCourse = function(req, res, next) {
 
         let username = req.user.username;
 
-        // /portal - 7
-        // url is longer, so remove extra 
-        var teacherUsername = url.substring(7, url.length - 1);
-
-        let teacherSlash = teacherUsername.search('/');
-
-        // course/ - 8
-        var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-        // we have /:teacherUsername/course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have /course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        teacherUsername = teacherUsername.substring(0, teacherSlash);
+        var searchedCourse = urlFilterCourse(url)
 
         var courseInfo;
 
@@ -104,29 +87,8 @@ exports.getSyllabus = function (req, res, next) {
 
         let username = req.user.username;
 
-        // /portal - 7
-        // url is longer, so remove extra 
-        let teacherUsername = url.substring(7, url.length - 1);
-
-        let teacherSlash = teacherUsername.search('/');
-
-        // course/ - 8
-        var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-        // we have /:teacherUsername/course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have /course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have :course/assignment
-
-        let courseSlash = searchedCourse.search('/');
-
-        searchedCourse = searchedCourse.substring(0, courseSlash);
-
+        var searchedCourse = urlFilterCourse(url)
+        
         var syllabusInfo;
 
         mongodb.findTeacherByUsername(username).then(function (teacher) {
@@ -172,29 +134,8 @@ exports.getSchedule = function (req, res, next) {
 
         let username = req.user.username;
 
-        // /portal - 7
-        // url is longer, so remove extra 
-        let teacherUsername = url.substring(7, url.length - 1);
-
-        let teacherSlash = teacherUsername.search('/');
-
-        // course/ - 8
-        var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-        // we have /:teacherUsername/course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have /course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have :course/assignment
-
-        let courseSlash = searchedCourse.search('/');
-
-        searchedCourse = searchedCourse.substring(0, courseSlash);
-
+        var searchedCourse = urlFilterCourse(url)
+        
         var scheduleInfo;
 
         mongodb.findTeacherByUsername(username).then(function (teacher) {
@@ -240,29 +181,8 @@ exports.getAssignments = function (req, res, next) {
 
         let username = req.user.username;
 
-        // /portal - 7
-        // url is longer, so remove extra 
-        let teacherUsername = url.substring(7, url.length - 1);
-
-        let teacherSlash = teacherUsername.search('/');
-
-        // course/ - 8
-        var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-        // we have /:teacherUsername/course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have /course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have :course/assignment
-
-        let courseSlash = searchedCourse.search('/');
-
-        searchedCourse = searchedCourse.substring(0, courseSlash);
-
+        var searchedCourse = urlFilterCourse(url)
+        
         var assignmentInfo;
 
         mongodb.findTeacherByUsername(username).then(function (teacher) {
@@ -308,29 +228,8 @@ exports.getLectureNotes = function (req, res, next) {
 
         let username = req.user.username;
 
-        // /portal - 7
-        // url is longer, so remove extra 
-        let teacherUsername = url.substring(7, url.length - 1);
-
-        let teacherSlash = teacherUsername.search('/');
-
-        // course/ - 8
-        var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-        // we have /:teacherUsername/course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have /course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have :course/assignment
-
-        let courseSlash = searchedCourse.search('/');
-
-        searchedCourse = searchedCourse.substring(0, courseSlash);
-
+        var searchedCourse = urlFilterCourse(url)
+        
         var lectureNotesInfo;
 
         mongodb.findTeacherByUsername(username).then(function (teacher) {
@@ -379,29 +278,8 @@ exports.getClassNotes = function (req, res, next) {
 
         let username = req.user.username;
 
-        // /portal - 7
-        // url is longer, so remove extra 
-        let teacherUsername = url.substring(7, url.length - 1);
-
-        let teacherSlash = teacherUsername.search('/');
-
-        // course/ - 8
-        var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-        // we have /:teacherUsername/course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have /course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have :course/assignment
-
-        let courseSlash = searchedCourse.search('/');
-
-        searchedCourse = searchedCourse.substring(0, courseSlash);
-
+        var searchedCourse = urlFilterCourse(url)
+        
         var classNotesInfo;
 
         mongodb.findTeacherByUsername(username).then(function (teacher) {
@@ -449,29 +327,8 @@ exports.getOtherNotes = function (req, res, next) {
 
         let username = req.user.username;
 
-        // /portal - 7
-        // url is longer, so remove extra 
-        let teacherUsername = url.substring(7, url.length - 1);
-
-        let teacherSlash = teacherUsername.search('/');
-
-        // course/ - 8
-        var searchedCourse = teacherUsername.substring(teacherSlash, teacherUsername.length);
-
-        // we have /:teacherUsername/course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have /course/:course/
-
-        searchedCourse = searchedCourse.substring(7, searchedCourse.length);
-
-        // we have :course/assignment
-
-        let courseSlash = searchedCourse.search('/');
-
-        searchedCourse = searchedCourse.substring(0, courseSlash);
-
+        var searchedCourse = urlFilterCourse(url)
+        
         var otherNotesInfo;
 
         mongodb.findTeacherByUsername(username).then(function (teacher) {
@@ -509,4 +366,20 @@ exports.getOtherNotes = function (req, res, next) {
 
     }
 
+}
+
+function urlFilterCourse(url) {
+    
+    // /course/ - 8
+    var searchedCourse = url.substring();
+
+    let courseSlash = searchedCourse.search('/course/');
+
+    searchedCourse = searchedCourse.substring(courseSlash + 8, searchedCourse.length);
+
+    var tempSlash = searchedCourse.search('/');
+
+    searchedCourse = searchedCourse.substring(0, tempSlash);
+
+    return searchedCourse;
 }
