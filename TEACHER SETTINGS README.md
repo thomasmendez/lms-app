@@ -29,7 +29,7 @@ You should be able to see a confimation pop up after clicking the update email b
 
 ## Upate Semester
 
-![Create Account Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/teacher/settings/Semester%20Update%211.png)
+![Create Account Image](https://github.com/thomasmendez/lms-app/blob/master/markdown/images/teacher/settings/Semester%20Update%201.png)
 
 You can update the current semester you are teaching by setting up the semester and year. You can choose between Fall, Spring, and Full-Year for this year or next year. (Please note that you can't set your year back to a previous year)
 
