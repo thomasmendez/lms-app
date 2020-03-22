@@ -59,6 +59,9 @@ html(lang='en')
                               if (success.semester === 'Fall')
                                 input(type='radio', name='semester', value='Fall', id='fall', checked='checked')
                                 |  Fall
+                              else 
+                                input(type='radio', name='semester', value='Fall', id='fall')
+                                |  Fall
                             else 
                               if (user.semester === 'Fall')
                                 input(type='radio', name='semester', value='Fall', id='fall', checked='checked')
@@ -72,6 +75,9 @@ html(lang='en')
                               if (success.semester === 'Spring')
                                 input(type='radio', name='semester', value='Spring', id='spring', checked='checked')
                                 |  Spring
+                              else 
+                                input(type='radio', name='semester', value='Spring', id='spring')
+                                |  Spring
                             else 
                               if (user.semester === 'Spring')
                                 input(type='radio', name='semester', value='Spring', id='spring', checked='checked')
@@ -84,6 +90,9 @@ html(lang='en')
                             if (success && success.semseter)
                               if (success.semester === 'Full-Year')
                                 input(type='radio', name='semester', value='Full-Year', id='full-year', checked='checked')
+                                |  Full-Year
+                              else 
+                                input(type='radio', name='semester', value='Full-Year', id='full-year')
                                 |  Full-Year
                             else
                               if (user.semester === 'Full-Year')
